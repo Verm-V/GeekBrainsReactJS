@@ -37,10 +37,12 @@ function App() {
     setInputText("");
   };
 
-  /** Ответ бота на сообщение пользователя */
+  /** Ответ бота на сообщение пользователя с задержкой*/
   useEffect(() => {
     if (!!lastName && lastName !== usersNames.BOT) {
-      storeMessageToList(botMessage, usersNames.BOT);
+      setTimeout(() => {
+        storeMessageToList(botMessage, usersNames.BOT);
+      }, 1000)
     }
   }, [lastName]);
 

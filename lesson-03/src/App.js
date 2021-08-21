@@ -2,6 +2,19 @@ import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import MessagesScreen from "./MessagesScreen";
 import InputScreen from "./InputScreen";
+import ChatsScreen from "./ChatsScreen";
+import { ThemeProvider, createTheme } from "@material-ui/core/styles";
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#FF00FF",
+    },
+    secondary: {
+      main: "#FF00FF",
+    },
+  },
+});
 
 const useStyles = makeStyles(() => ({
   app: {
@@ -12,9 +25,16 @@ const useStyles = makeStyles(() => ({
     alignContent: "center",
   },
   mainWindow: {
-    width: "640px",
+    width: "520px",
     height: "600px",
-    border: "2px solid",
+    border: "0px solid",
+    display: "flex",
+    flexDirection: "column",
+  },
+  chatsListWindow: {
+    width: "120px",
+    height: "600px",
+    border: "0px solid",
     display: "flex",
     flexDirection: "column",
   },
@@ -32,12 +52,33 @@ function App() {
   /** Фиксированное сообщение для бота */
   const botMessage = "Сообщение принято";
 
+
   /** Сообщение в поле ввода */
   const [inputText, setInputText] = useState("");
+  /** Массив объектов - чатов */
+  const [chatsList, setChatsList] = useState([]);
   /** Массив объектов - сообщений */
   const [messagesList, setMessagesList] = useState([]);
   /** Указатель на того кто последним оставил сообщение */
   const [lastName, setLastName] = useState();
+
+  /** Инициализация*/
+  useEffect(() => {
+    setChatsList((prev) => [
+      ...prev,
+      {
+        id: "01",
+        name: "Чат 1",
+      },
+    ]);
+    setChatsList((prev) => [
+      ...prev,
+      {
+        id: "02",
+        name: "Чат 2",
+      },
+    ]);
+  }, []);
 
   /** Записывает сообщение в список и устанавливает указатель автора последнего сообщения */
   const storeMessageToList = (text, name) => {
@@ -68,17 +109,22 @@ function App() {
 
   /** */
   return (
-    <div className={classes.app}>
-      <div className={classes.mainWindow}>
-        <MessagesScreen messages={messagesList} />
-        <InputScreen
-          value={inputText}
-          onChange={setInputText}
-          onSendMessage={onSendMessage}
-          name={usersNames.USER}
-        />
+    <ThemeProvider theme={theme}>
+      <div className={classes.app}>
+        <div className={classes.chatsListWindow}>
+          <ChatsScreen chats={chatsList} />
+        </div>
+        <div className={classes.mainWindow}>
+          <MessagesScreen messages={messagesList} />
+          <InputScreen
+            value={inputText}
+            onChange={setInputText}
+            onSendMessage={onSendMessage}
+            name={usersNames.USER}
+          />
+        </div>
       </div>
-    </div>
+    </ThemeProvider>
   );
 }
 

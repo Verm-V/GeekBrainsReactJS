@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import Button from "@material-ui/core/Button";
 import SendIcon from "@material-ui/icons/SendTwoTone";
 import TextField from "@material-ui/core/TextField";
@@ -7,25 +7,30 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles(() => ({
   inputScreen: {
     flex: 1,
-    border: "2px solid",
+    border: "0px solid",
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
-    background: "lightgray"
+    background: "lightgray",
   },
   inputLine: {
-    flex: 1
-    //width: "80%",
-    //fontSize: "100%",
+    flex: 1,
   },
 }));
 
 function InputScreen(props) {
   const classes = useStyles();
+  const inputField = useRef();
+
+  /** Установка фокуса на поле ввода */
+  const focus = () => {
+    inputField.current.focus();
+  };
 
   return (
     <div className={classes.inputScreen}>
       <TextField
+        inputRef={inputField}
         variant="filled"
         size="small"
         label="Введите текст сообщения"
@@ -37,6 +42,7 @@ function InputScreen(props) {
             props.onSendMessage(props.name);
           }
         }}
+        autoFocus
       />
       <Button
         color="default"
@@ -44,7 +50,10 @@ function InputScreen(props) {
         variant="contained"
         endIcon={<SendIcon />}
         className="sendButton"
-        onClick={() => props.onSendMessage(props.name)}
+        onClick={() => {
+          props.onSendMessage(props.name);
+          focus();
+        }}
       >
         Отправить
       </Button>

@@ -7,7 +7,7 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
   messagesScreen: {
     height: "90%",
-    border: "2px solid",
+    border: "0px solid",
     background: "teal",
   },
   msgAuthor: {
@@ -39,7 +39,7 @@ function MessagesScreen(props) {
 
   return (
     <div className={classes.messagesScreen}>
-      <List dense="true">{listItems}</List>
+      <List dense={true} disablePadding={true}>{listItems}</List>
     </div>
   );
 }

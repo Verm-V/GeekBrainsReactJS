@@ -4,6 +4,8 @@ import MessagesScreen from "./MessagesScreen";
 import InputScreen from "./InputScreen";
 import ChatsScreen from "./ChatsScreen";
 import { ThemeProvider, createTheme } from "@material-ui/core/styles";
+import { useDispatch, useSelector } from "react-redux";
+import { addMessage } from "./ChatSlice";
 
 const theme = createTheme({
   palette: {
@@ -58,7 +60,9 @@ function Chat() {
   /** Массив объектов - чатов */
   const [chatsList, setChatsList] = useState([]);
   /** Массив объектов - сообщений */
-  const [messagesList, setMessagesList] = useState([]);
+  //const [messagesList, setMessagesList] = useState([]);
+  const { messagesList } = useSelector((state) => state.chat);
+  const dispatch = useDispatch();
   /** Указатель на того кто последним оставил сообщение */
   const [lastName, setLastName] = useState();
 
@@ -82,13 +86,14 @@ function Chat() {
 
   /** Записывает сообщение в список и устанавливает указатель автора последнего сообщения */
   const storeMessageToList = (text, name) => {
-    setMessagesList((prev) => [
-      ...prev,
-      {
-        text: text,
-        author: name,
-      },
-    ]);
+    dispatch(addMessage({ text: text, author: name }));
+    // setMessagesList((prev) => [
+    //   ...prev,
+    //   {
+    //     text: text,
+    //     author: name,
+    //   },
+    // ]);
     setLastName(name);
   };
 

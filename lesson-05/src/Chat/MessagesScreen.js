@@ -3,6 +3,7 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import { makeStyles } from "@material-ui/core/styles";
+import { PropTypes } from "prop-types";
 
 const useStyles = makeStyles((theme) => ({
   messagesScreen: {
@@ -21,10 +22,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 /** Экран вывода сообщений */
-function MessagesScreen(props) {
+const MessagesScreen = ({ messages }) => {
   const classes = useStyles();
 
-  const listItems = props.messages.map((message, i) => (
+  const listItems = messages.map((message, i) => (
     <ListItem key={i}>
       <ListItemText>
         <span className={classes.msgAuthor}>

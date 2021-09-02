@@ -6,4 +6,6 @@
   
 - **[Задание урока №2 - Жизненный цикл компонента.](./Docs/task-02.md)**  
   
+- **[Задание урока №3 - Virtual DOM. Material UI. PropTypes.](./Docs/task-03.md)**  
+  
   

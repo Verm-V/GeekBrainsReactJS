@@ -60,7 +60,6 @@ function Chat() {
   /** Массив объектов - чатов */
   const [chatsList, setChatsList] = useState([]);
   /** Массив объектов - сообщений */
-  //const [messagesList, setMessagesList] = useState([]);
   const { messagesList } = useSelector((state) => state.chat);
   const dispatch = useDispatch();
   /** Указатель на того кто последним оставил сообщение */
@@ -87,13 +86,6 @@ function Chat() {
   /** Записывает сообщение в список и устанавливает указатель автора последнего сообщения */
   const storeMessageToList = (text, name) => {
     dispatch(addMessage({ text: text, author: name }));
-    // setMessagesList((prev) => [
-    //   ...prev,
-    //   {
-    //     text: text,
-    //     author: name,
-    //   },
-    // ]);
     setLastName(name);
   };
 

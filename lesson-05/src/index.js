@@ -3,8 +3,8 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import { Provider } from "react-redux";
 import { ThemeProvider } from "@material-ui/styles";
-import { theme } from "./theme";
-import store from "./store";
+import { theme } from "./Theme";
+import store from "./Store";
 
 export const MyDataContext = React.createContext({ appVersion: "0.8.0" });
 
